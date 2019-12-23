@@ -1,0 +1,49 @@
+{
+  "name": "@fwrlines/template-now-storybook",
+  "version": "0.111.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fwrlines/template-now-storybook"
+  },
+  "description": "A simple template repo to initialize storybook with react, ready to be npm-published as esm/cjs, and ready to be uploaded to zeit now.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "clone-scss": "git clone https://github.com/fwrlines/scss.git ./src/scss",
+    "now-build": "npm run clone-scss && mkdir ./public && npm run build-storybook",
+    "build": "echo",
+    "build-storybook": "build-storybook",
+    "copy-css:cjs": "rsync -a --prune-empty-dirs --include '*/' --include '*.scss' --exclude '*' src/ui/ dist/cjs/",
+    "copy-css:es": "rsync -a --prune-empty-dirs --include '*/' --include '*.scss' --exclude '*' src/ui/ dist/es/",
+    "compile:cjs": "NODE_ENV=cjs babel src/ui --out-dir dist/cjs --ignore **/stories/*.js",
+    "compile:es": "NODE_ENV=es babel src/ui --out-dir dist/es --ignore **/stories/*.js",
+    "build:cjs": "npm run compile:cjs && npm run copy-css:cjs",
+    "build:es": "npm run compile:es && npm run copy-css:es",
+    "compile": "npm run pre-compile && npm run build:cjs && npm run build:es",
+    "compile:show": "npm run compile && tree dist",
+    "pre-compile": "rm -rf ./dist",
+    "pub": "npm run commit && npm version patch && npm publish",
+    "prepare": "npm run compile",
+    "commit": "git add . && git commit -m 'Version bump' && git push",
+    "bd": "npm run build&&npm run commit "
+  },
+  "keywords": [],
+  "author": {
+    "name": "fwrlines",
+    "email": "adrian@fwrlines.com",
+    "url": "https://github.com/fwrlines"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8",
+    "babel-loader": "^8.0.6"
+  }
+}
