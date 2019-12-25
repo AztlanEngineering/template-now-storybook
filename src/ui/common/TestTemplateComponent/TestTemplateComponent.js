@@ -6,12 +6,14 @@ if(!process.env.BACKEND) import(/* webpackChunkName: "css.test_template_componen
 
 const main_class = 'test_template_component'
 
-const uselessrule=4444
-
+/**
+ * Use `TestTemplateComponent` to highlight key info with a predefined status. Easy peasy!
+ */
 const TestTemplateComponent = memo(({
   id,
   className='',
-  style
+  style,
+  children,
 }) =>
   <div
     className={
@@ -25,27 +27,22 @@ const TestTemplateComponent = memo(({
     style={ style }
   >
     <h2>Welcome to the TestTemplateComponent component</h2>
+    { children }
   </div>
 )
 
-/*
 TestTemplateComponent.propTypes = {
-	id: PropTypes.string,
+  /**
+   * Description of prop "id".
+   */
+  id: PropTypes.string,
   className: PropTypes.string,
   style:PropTypes.object,
-  task: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-  }),
-  onArchiveTask: PropTypes.func,
-  onPinTask: PropTypes.func,
-	children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]).isRequired
-};
-*/
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+}
 
 
 export default TestTemplateComponent
