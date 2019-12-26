@@ -1,4 +1,4 @@
-export { TestTemplateComponent } from './TestTemplateComponent'
+export { Epsilon } from './Epsilon'
 /*
 export { AnimatedVCaret } from './AnimatedVCaret'
 export { Checklist } from './Checklist'
